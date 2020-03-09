@@ -14,12 +14,30 @@ func buildIndexHTML() throws {
     let content = Node.div(
         .class("introduction"),
         .h1(.text("Hello.")),
-        .p(.text("My name is Ziyuan Zhao"), .style("font-weight:500; font-size:2.2em")),
-        .p(.text("I am a fullstack developer and a Swift lover. Now I'm an intership @meituan. Here is my blog")),
-        .p(.text("I'm also an independent developer. I have two iOS app, ")),
-        .p(.text("I'm one of the creators of NUAA Open Source. As a core developer, we have developed a cloud U-disk called SafeU")),
-        .p(.text("Besides, I'm a fan of Marval & DC. I like playing games on PS4")),
-        .p(.text("You can find me "),.a(.text("@Github"), .href("https://github.com/RayZhao1998")))
+        .p(
+            .text("My name is Ziyuan Zhao"),
+            .style("font-weight:500; font-size:2.2em")
+        ),
+        .p(
+            .text("I am a fullstack developer and a Swift lover. Now I'm an intership @meituan. Here is my blog")
+        ),
+        .p(
+            .text("I'm also an independent developer. I have two iOS app, "),
+            .a(.text("tomatic"), .href("https://apps.apple.com/cn/app/id1472871822")),
+            .text(" & "),
+            .a(.text("TodayMatters"), .href("https://itunes.apple.com/cn/app//id1448675694?mt=8"))
+        ),
+        .p(
+            .text("I'm one of the creators of NUAA Open Source. As a core developer, we have developed a cloud U-disk called "),
+            .a(.text("SafeU"), .href("https://safeu.a2os.club"))
+        ),
+        .p(
+            .text("Besides, I'm a fan of Marval & DC. I like playing games on PS4")
+        ),
+        .p(
+            .text("You can find me "),
+            .raw(try buildContactHTML())
+        )
     ).render()
     let html = try buildHTML(content)
     let outputFolder = try Folder(path: PROJECT_PATH + PROJECT_OUTPUT_DIR)
@@ -28,6 +46,26 @@ func buildIndexHTML() throws {
         let output = try outputFolder.createFile(named: fileName)
         try output.write(html)
     }
+}
+
+private func buildContactHTML() throws -> String {
+    let dict = [
+        "@Github": "https://github.com/RayZhao1998",
+        "@Twitter": "https://twitter.com/RayZhao98",
+        "@Telegram": "https://t.me/ninjahome",
+        "@Weibo": "https://weibo.com/u/6056735717",
+        "@Zhihu": "http://www.zhihu.com/people/5kyn3t"
+    ]
+    var html = ""
+    var count = 0
+    for (platform, website) in dict {
+        html += Node.a(.href(website), .text(platform)).render()
+        if (dict.count != count + 1) {
+            html += ", "
+        }
+        count += 1
+    }
+    return html
 }
 
 public func buildHTML(_ content: String) throws -> String {
