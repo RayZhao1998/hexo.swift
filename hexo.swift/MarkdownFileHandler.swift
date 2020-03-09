@@ -17,6 +17,7 @@ struct MarkdownFileHandler {
     static let shared = MarkdownFileHandler()
     
     let dateFormatter = DateFormatter()
+    let markdownParser = MarkdownParser()
     
     init() {
         dateFormatter.locale = Locale(identifier: DATE_FORMATTER_LOCALE_IDENTIFIER)
@@ -45,7 +46,7 @@ struct MarkdownFileHandler {
                 .raw(post.content)
             )
         ).render()
-        let outputFolder = try Folder(path: PROJECT_PATH + "Output")
+        let outputFolder = try Folder(path: PROJECT_PATH + PROJECT_OUTPUT_DIR)
         let fileName = String(file.name.split(separator: ".").first ?? "undefined") + ".html"
         if (!outputFolder.containsFile(named: fileName)) {
             let output = try outputFolder.createFile(named: fileName)

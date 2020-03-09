@@ -9,6 +9,7 @@
 import Foundation
 import Files
 
+try buildIndexHTML()
 for file in try Folder(path: PROJECT_PATH + "Posts").files {
     try MarkdownFileHandler.shared.generateHTML(file)
 }
