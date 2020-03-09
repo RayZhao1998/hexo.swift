@@ -34,7 +34,8 @@ public func buildHTML(_ content: String) throws -> String {
     let html = HTML(
         .head(
             .title("Welcome to Ninjiacoder's Home!"),
-            .stylesheet("style.css")
+            .stylesheet("style.css"),
+            .meta(.charset(.utf8))
         ),
         .body(
             .div(
