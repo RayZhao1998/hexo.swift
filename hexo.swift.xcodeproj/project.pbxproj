@@ -11,6 +11,7 @@
 		D717345E2415129600613F7B /* MarkdownFileHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = D717345D2415129600613F7B /* MarkdownFileHandler.swift */; };
 		D717346324151A4A00613F7B /* Plot in Frameworks */ = {isa = PBXBuildFile; productRef = D717346224151A4A00613F7B /* Plot */; };
 		D717346624151AB100613F7B /* Ink in Frameworks */ = {isa = PBXBuildFile; productRef = D717346524151AB100613F7B /* Ink */; };
+		D77C41462416155C005571A1 /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = D77C41452416155C005571A1 /* Configuration.swift */; };
 		D7F9F3B824141734000F11A6 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7F9F3B724141734000F11A6 /* main.swift */; };
 		D7F9F3C024141754000F11A6 /* Page.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7F9F3BF24141754000F11A6 /* Page.swift */; };
 		D7F9F3C2241417D6000F11A6 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7F9F3C1241417D6000F11A6 /* Post.swift */; };
@@ -31,6 +32,8 @@
 /* Begin PBXFileReference section */
 		D717345D2415129600613F7B /* MarkdownFileHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarkdownFileHandler.swift; sourceTree = "<group>"; };
 		D71734602415130700613F7B /* test.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = test.md; sourceTree = "<group>"; };
+		D77C41452416155C005571A1 /* Configuration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Configuration.swift; sourceTree = "<group>"; };
+		D77C4147241618A9005571A1 /* test2.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = test2.md; sourceTree = "<group>"; };
 		D7F9F3B424141734000F11A6 /* hexo.swift */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = hexo.swift; sourceTree = BUILT_PRODUCTS_DIR; };
 		D7F9F3B724141734000F11A6 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		D7F9F3BF24141754000F11A6 /* Page.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Page.swift; sourceTree = SOURCE_ROOT; };
@@ -55,6 +58,7 @@
 			isa = PBXGroup;
 			children = (
 				D71734602415130700613F7B /* test.md */,
+				D77C4147241618A9005571A1 /* test2.md */,
 			);
 			path = Posts;
 			sourceTree = "<group>";
@@ -90,6 +94,7 @@
 				D7F9F3BE2414173E000F11A6 /* Models */,
 				D7F9F3B724141734000F11A6 /* main.swift */,
 				D717345D2415129600613F7B /* MarkdownFileHandler.swift */,
+				D77C41452416155C005571A1 /* Configuration.swift */,
 			);
 			path = hexo.swift;
 			sourceTree = "<group>";
@@ -172,6 +177,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D7F9F3C024141754000F11A6 /* Page.swift in Sources */,
+				D77C41462416155C005571A1 /* Configuration.swift in Sources */,
 				D717345E2415129600613F7B /* MarkdownFileHandler.swift in Sources */,
 				D7F9F3C2241417D6000F11A6 /* Post.swift in Sources */,
 				D7F9F3B824141734000F11A6 /* main.swift in Sources */,
