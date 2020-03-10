@@ -39,7 +39,7 @@ func buildIndexHTML() throws {
             .raw(try buildContactHTML())
         )
     ).render()
-    let html = try buildHTML(content)
+    let html = try MarkdownFileHandler.shared.buildHTML(content)
     let outputFolder = try Folder(path: PROJECT_PATH + PROJECT_OUTPUT_DIR)
     let fileName = "index.html"
     if (!outputFolder.containsFile(named: fileName)) {
@@ -65,50 +65,5 @@ private func buildContactHTML() throws -> String {
         }
         count += 1
     }
-    return html
-}
-
-public func buildHTML(_ content: String) throws -> String {
-    let html = HTML(
-        .head(
-            .title("Welcome to Ninjiacoder's Home!"),
-            .stylesheet("style.css"),
-            .meta(.charset(.utf8))
-        ),
-        .body(
-            .div(
-                .class("wrapper"),
-                .raw(try buildHeaderHTML()),
-                .raw(try buildContentHTML(content)),
-                .raw(try buildFooterHTML())
-            )
-        )
-    ).render()
-    return html
-}
-
-public func buildHeaderHTML() throws -> String {
-    let html = Node.h1(
-        .class("header"),
-        .a(.class("author"), .href("/"), .text("Ninjiacoder")),
-        .p(.text("Swift lover, Fullstack Developer"))
-    ).render()
-    return html
-}
-
-public func buildFooterHTML() throws -> String {
-    let html = Node.div(
-        .class("footer"),
-        .p(.text("本网站由 hexo.swift 强力驱动")),
-        .a(.text("苏ICP备17050796号"), .href("http://www.beian.miit.gov.cn"))
-    ).render()
-    return html
-}
-
-public func buildContentHTML(_ content: String) throws -> String {
-    let html = Node.div(
-        .class("content"),
-        .raw(content)
-    ).render()
     return html
 }

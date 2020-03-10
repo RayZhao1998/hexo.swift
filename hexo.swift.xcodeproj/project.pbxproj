@@ -33,6 +33,7 @@
 /* Begin PBXFileReference section */
 		D717345D2415129600613F7B /* MarkdownFileHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarkdownFileHandler.swift; sourceTree = "<group>"; };
 		D71734602415130700613F7B /* test.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = test.md; sourceTree = "<group>"; };
+		D76090BF2417448B00AD2E6D /* Codable协议.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = "Codable协议.md"; sourceTree = "<group>"; };
 		D77C41452416155C005571A1 /* Configuration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Configuration.swift; sourceTree = "<group>"; };
 		D77C4147241618A9005571A1 /* test2.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = test2.md; sourceTree = "<group>"; };
 		D77C414824162108005571A1 /* Index.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Index.swift; sourceTree = "<group>"; };
@@ -61,6 +62,7 @@
 			children = (
 				D71734602415130700613F7B /* test.md */,
 				D77C4147241618A9005571A1 /* test2.md */,
+				D76090BF2417448B00AD2E6D /* Codable协议.md */,
 			);
 			path = Posts;
 			sourceTree = "<group>";
