@@ -10,7 +10,7 @@ import Foundation
 
 struct Post {
     var title: String
-    var discription: String?
+    var description: String?
     var content: String
     var createdAt: Date
     var updatedAt: Date
@@ -21,6 +21,7 @@ struct Post {
          createdAt: Date = Date(),
          updatedAt: Date = Date()) {
         self.title = title
+        self.description = description
         self.content = content
         self.createdAt = createdAt
         self.updatedAt = updatedAt

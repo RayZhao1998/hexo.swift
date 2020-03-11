@@ -11,14 +11,26 @@
 		D717345E2415129600613F7B /* MarkdownFileHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = D717345D2415129600613F7B /* MarkdownFileHandler.swift */; };
 		D717346324151A4A00613F7B /* Plot in Frameworks */ = {isa = PBXBuildFile; productRef = D717346224151A4A00613F7B /* Plot */; };
 		D717346624151AB100613F7B /* Ink in Frameworks */ = {isa = PBXBuildFile; productRef = D717346524151AB100613F7B /* Ink */; };
+		D76090C12417E50C00AD2E6D /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = D76090C02417E50C00AD2E6D /* Post.swift */; };
 		D77C41462416155C005571A1 /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = D77C41452416155C005571A1 /* Configuration.swift */; };
 		D77C414924162108005571A1 /* Index.swift in Sources */ = {isa = PBXBuildFile; fileRef = D77C414824162108005571A1 /* Index.swift */; };
+		D7F6FBC324193C420057B452 /* ShellOut in Frameworks */ = {isa = PBXBuildFile; productRef = D7F6FBC224193C420057B452 /* ShellOut */; };
+		D7F6FBD5241941C10057B452 /* CLI.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7F6FBD4241941C10057B452 /* CLI.swift */; };
+		D7F6FBD6241942A00057B452 /* CLI.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7F6FBD4241941C10057B452 /* CLI.swift */; };
 		D7F9F3B824141734000F11A6 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7F9F3B724141734000F11A6 /* main.swift */; };
 		D7F9F3C024141754000F11A6 /* Page.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7F9F3BF24141754000F11A6 /* Page.swift */; };
-		D7F9F3C2241417D6000F11A6 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7F9F3C1241417D6000F11A6 /* Post.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
+		D7F6FBC824193D7A0057B452 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
 		D7F9F3B224141734000F11A6 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -34,20 +46,30 @@
 		D717345D2415129600613F7B /* MarkdownFileHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarkdownFileHandler.swift; sourceTree = "<group>"; };
 		D71734602415130700613F7B /* test.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = test.md; sourceTree = "<group>"; };
 		D76090BF2417448B00AD2E6D /* Codable协议.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = "Codable协议.md"; sourceTree = "<group>"; };
+		D76090C02417E50C00AD2E6D /* Post.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		D77C41452416155C005571A1 /* Configuration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Configuration.swift; sourceTree = "<group>"; };
 		D77C4147241618A9005571A1 /* test2.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = test2.md; sourceTree = "<group>"; };
 		D77C414824162108005571A1 /* Index.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Index.swift; sourceTree = "<group>"; };
+		D7F6FBCA24193D7A0057B452 /* HexoCLI */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = HexoCLI; sourceTree = BUILT_PRODUCTS_DIR; };
+		D7F6FBD4241941C10057B452 /* CLI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLI.swift; sourceTree = "<group>"; };
 		D7F9F3B424141734000F11A6 /* hexo.swift */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = hexo.swift; sourceTree = BUILT_PRODUCTS_DIR; };
 		D7F9F3B724141734000F11A6 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		D7F9F3BF24141754000F11A6 /* Page.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Page.swift; sourceTree = SOURCE_ROOT; };
-		D7F9F3C1241417D6000F11A6 /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		D7F6FBC724193D7A0057B452 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		D7F9F3B124141734000F11A6 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D7F6FBC324193C420057B452 /* ShellOut in Frameworks */,
 				D717346624151AB100613F7B /* Ink in Frameworks */,
 				D717345C2415127900613F7B /* Files in Frameworks */,
 				D717346324151A4A00613F7B /* Plot in Frameworks */,
@@ -74,6 +96,14 @@
 			path = Output;
 			sourceTree = "<group>";
 		};
+		D7F6FBD3241941AC0057B452 /* CLI */ = {
+			isa = PBXGroup;
+			children = (
+				D7F6FBD4241941C10057B452 /* CLI.swift */,
+			);
+			path = CLI;
+			sourceTree = "<group>";
+		};
 		D7F9F3AB24141734000F11A6 = {
 			isa = PBXGroup;
 			children = (
@@ -86,6 +116,7 @@
 			isa = PBXGroup;
 			children = (
 				D7F9F3B424141734000F11A6 /* hexo.swift */,
+				D7F6FBCA24193D7A0057B452 /* HexoCLI */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -93,6 +124,7 @@
 		D7F9F3B624141734000F11A6 /* hexo.swift */ = {
 			isa = PBXGroup;
 			children = (
+				D7F6FBD3241941AC0057B452 /* CLI */,
 				D717346724153BFF00613F7B /* Output */,
 				D717345F241512E600613F7B /* Posts */,
 				D7F9F3BE2414173E000F11A6 /* Models */,
@@ -107,8 +139,8 @@
 		D7F9F3BE2414173E000F11A6 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				D76090C02417E50C00AD2E6D /* Post.swift */,
 				D7F9F3BF24141754000F11A6 /* Page.swift */,
-				D7F9F3C1241417D6000F11A6 /* Post.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -116,6 +148,23 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		D7F6FBC924193D7A0057B452 /* HexoCLI */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D7F6FBCE24193D7A0057B452 /* Build configuration list for PBXNativeTarget "HexoCLI" */;
+			buildPhases = (
+				D7F6FBC624193D7A0057B452 /* Sources */,
+				D7F6FBC724193D7A0057B452 /* Frameworks */,
+				D7F6FBC824193D7A0057B452 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = HexoCLI;
+			productName = HexoCLI;
+			productReference = D7F6FBCA24193D7A0057B452 /* HexoCLI */;
+			productType = "com.apple.product-type.tool";
+		};
 		D7F9F3B324141734000F11A6 /* hexo.swift */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = D7F9F3BB24141734000F11A6 /* Build configuration list for PBXNativeTarget "hexo.swift" */;
@@ -133,6 +182,7 @@
 				D717345B2415127900613F7B /* Files */,
 				D717346224151A4A00613F7B /* Plot */,
 				D717346524151AB100613F7B /* Ink */,
+				D7F6FBC224193C420057B452 /* ShellOut */,
 			);
 			productName = hexo.swift;
 			productReference = D7F9F3B424141734000F11A6 /* hexo.swift */;
@@ -148,6 +198,9 @@
 				LastUpgradeCheck = 1130;
 				ORGANIZATIONNAME = "Ziyuan Zhao";
 				TargetAttributes = {
+					D7F6FBC924193D7A0057B452 = {
+						CreatedOnToolsVersion = 11.3.1;
+					};
 					D7F9F3B324141734000F11A6 = {
 						CreatedOnToolsVersion = 11.3.1;
 					};
@@ -166,17 +219,27 @@
 				D717345A2415127900613F7B /* XCRemoteSwiftPackageReference "Files" */,
 				D717346124151A4A00613F7B /* XCRemoteSwiftPackageReference "plot" */,
 				D717346424151AB100613F7B /* XCRemoteSwiftPackageReference "ink" */,
+				D7F6FBC124193C420057B452 /* XCRemoteSwiftPackageReference "ShellOut" */,
 			);
 			productRefGroup = D7F9F3B524141734000F11A6 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
 				D7F9F3B324141734000F11A6 /* hexo.swift */,
+				D7F6FBC924193D7A0057B452 /* HexoCLI */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXSourcesBuildPhase section */
+		D7F6FBC624193D7A0057B452 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D7F6FBD6241942A00057B452 /* CLI.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		D7F9F3B024141734000F11A6 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -184,8 +247,9 @@
 				D7F9F3C024141754000F11A6 /* Page.swift in Sources */,
 				D77C414924162108005571A1 /* Index.swift in Sources */,
 				D77C41462416155C005571A1 /* Configuration.swift in Sources */,
+				D7F6FBD5241941C10057B452 /* CLI.swift in Sources */,
+				D76090C12417E50C00AD2E6D /* Post.swift in Sources */,
 				D717345E2415129600613F7B /* MarkdownFileHandler.swift in Sources */,
-				D7F9F3C2241417D6000F11A6 /* Post.swift in Sources */,
 				D7F9F3B824141734000F11A6 /* main.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -193,6 +257,28 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
+		D7F6FBCF24193D7A0057B452 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = LCS264YR65;
+				ENABLE_HARDENED_RUNTIME = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		D7F6FBD024193D7A0057B452 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = LCS264YR65;
+				ENABLE_HARDENED_RUNTIME = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
 		D7F9F3B924141734000F11A6 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -331,6 +417,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		D7F6FBCE24193D7A0057B452 /* Build configuration list for PBXNativeTarget "HexoCLI" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D7F6FBCF24193D7A0057B452 /* Debug */,
+				D7F6FBD024193D7A0057B452 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		D7F9F3AF24141734000F11A6 /* Build configuration list for PBXProject "hexo.swift" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -376,6 +471,14 @@
 				minimumVersion = 0.4.0;
 			};
 		};
+		D7F6FBC124193C420057B452 /* XCRemoteSwiftPackageReference "ShellOut" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/JohnSundell/ShellOut.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.3.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -393,6 +496,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = D717346424151AB100613F7B /* XCRemoteSwiftPackageReference "ink" */;
 			productName = Ink;
+		};
+		D7F6FBC224193C420057B452 /* ShellOut */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D7F6FBC124193C420057B452 /* XCRemoteSwiftPackageReference "ShellOut" */;
+			productName = ShellOut;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

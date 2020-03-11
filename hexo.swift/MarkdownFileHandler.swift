@@ -39,7 +39,7 @@ struct MarkdownFileHandler {
         ).render()
         let dateHTML = Node.p(
             .class("blog-date"),
-            .text(dateFormatter.string(from: post.createdAt))
+            .text("发布于 " + dateFormatter.string(from: post.createdAt))
         ).render()
         let postHTML = Node.div(
             .raw(titleHTML),
@@ -50,16 +50,25 @@ struct MarkdownFileHandler {
             )
         ).render()
         let html = try buildHTML(postHTML, styleSheet: styleSheet, scripts: scripts)
-        let outputFolder = try Folder(path: PROJECT_PATH + PROJECT_OUTPUT_DIR)
         let fileName = String(file.name.split(separator: ".").first ?? "undefined") + ".html"
-        if (!outputFolder.containsFile(named: fileName)) {
-            let output = try outputFolder.createFile(named: fileName)
-            try output.write(html)
+        try exportHTMLFile(html, fileName: fileName, dir: PROJECT_OUTPUT_DIR)
+    }
+    
+    public func exportHTMLFile(_ html: String, fileName: String, dir: String, rebuild: Bool = false) throws {
+        let outputFolder = try Folder(path: PROJECT_PATH + PROJECT_OUTPUT_DIR)
+        if (!outputFolder.containsSubfolder(named: dir)) {
+            try outputFolder.createSubfolder(named: dir)
+        }
+        let folder = try Folder(path: PROJECT_PATH + PROJECT_OUTPUT_DIR + "/" + dir)
+        if (!folder.containsFile(at: fileName)) {
+            let outputFile = try folder.createFile(named: fileName)
+            try outputFile.write(html)
         } else {
-            let output = try outputFolder.file(named: fileName)
-            if (SHA256(string: try output.readAsString()) != SHA256(string: html)) {
-                try output.write(html)
+            let file = try folder.file(named: fileName)
+            if (try rebuild || SHA256(string: file.readAsString()) != SHA256(string: html)) {
+                try file.write(html)
             }
+            try file.write(html)
         }
     }
     
@@ -104,6 +113,7 @@ struct MarkdownFileHandler {
     public func buildFooterHTML() throws -> String {
         let html = Node.div(
             .class("footer"),
+            .p(.text("Copyright © Ziyuan Zhao from Today Boring 2020")),
             .p(.text("本网站由 hexo.swift 强力驱动")),
             .a(.text("苏ICP备17050796号"), .href("http://www.beian.miit.gov.cn"))
         ).render()
@@ -133,15 +143,5 @@ struct MarkdownFileHandler {
             }
         }
         return digestData
-    }
-    
-    private func getDate(dateString: String?, fileDate: Date?) -> Date {
-        if let fileDate = fileDate {
-            return fileDate
-        }
-        if let dateString = dateString {
-            return dateFormatter.date(from: dateString) ?? Date()
-        }
-        return Date()
     }
 }
