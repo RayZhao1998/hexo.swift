@@ -17,6 +17,7 @@
 		D7F6FBC324193C420057B452 /* ShellOut in Frameworks */ = {isa = PBXBuildFile; productRef = D7F6FBC224193C420057B452 /* ShellOut */; };
 		D7F6FBD5241941C10057B452 /* CLI.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7F6FBD4241941C10057B452 /* CLI.swift */; };
 		D7F6FBD6241942A00057B452 /* CLI.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7F6FBD4241941C10057B452 /* CLI.swift */; };
+		D7F6FBD92419528B0057B452 /* String+Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7F6FBD82419528B0057B452 /* String+Date.swift */; };
 		D7F9F3B824141734000F11A6 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7F9F3B724141734000F11A6 /* main.swift */; };
 		D7F9F3C024141754000F11A6 /* Page.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7F9F3BF24141754000F11A6 /* Page.swift */; };
 /* End PBXBuildFile section */
@@ -52,6 +53,7 @@
 		D77C414824162108005571A1 /* Index.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Index.swift; sourceTree = "<group>"; };
 		D7F6FBCA24193D7A0057B452 /* HexoCLI */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = HexoCLI; sourceTree = BUILT_PRODUCTS_DIR; };
 		D7F6FBD4241941C10057B452 /* CLI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLI.swift; sourceTree = "<group>"; };
+		D7F6FBD82419528B0057B452 /* String+Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Date.swift"; sourceTree = "<group>"; };
 		D7F9F3B424141734000F11A6 /* hexo.swift */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = hexo.swift; sourceTree = BUILT_PRODUCTS_DIR; };
 		D7F9F3B724141734000F11A6 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		D7F9F3BF24141754000F11A6 /* Page.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Page.swift; sourceTree = SOURCE_ROOT; };
@@ -104,6 +106,14 @@
 			path = CLI;
 			sourceTree = "<group>";
 		};
+		D7F6FBD72419527B0057B452 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				D7F6FBD82419528B0057B452 /* String+Date.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
 		D7F9F3AB24141734000F11A6 = {
 			isa = PBXGroup;
 			children = (
@@ -124,6 +134,7 @@
 		D7F9F3B624141734000F11A6 /* hexo.swift */ = {
 			isa = PBXGroup;
 			children = (
+				D7F6FBD72419527B0057B452 /* Extension */,
 				D7F6FBD3241941AC0057B452 /* CLI */,
 				D717346724153BFF00613F7B /* Output */,
 				D717345F241512E600613F7B /* Posts */,
@@ -248,6 +259,7 @@
 				D77C414924162108005571A1 /* Index.swift in Sources */,
 				D77C41462416155C005571A1 /* Configuration.swift in Sources */,
 				D7F6FBD5241941C10057B452 /* CLI.swift in Sources */,
+				D7F6FBD92419528B0057B452 /* String+Date.swift in Sources */,
 				D76090C12417E50C00AD2E6D /* Post.swift in Sources */,
 				D717345E2415129600613F7B /* MarkdownFileHandler.swift in Sources */,
 				D7F9F3B824141734000F11A6 /* main.swift in Sources */,

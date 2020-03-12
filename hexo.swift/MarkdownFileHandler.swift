@@ -24,15 +24,15 @@ struct MarkdownFileHandler {
         dateFormatter.dateFormat = DATE_FORMATTER_DATEFORMAT
     }
     
-    func generateHTML(_ file: File, styleSheet: [String]? = nil, scripts: [String: String]? = nil) throws {
+    func generateHTML(_ file: File, styleSheet: [String]? = nil, scripts: [String: [String]]? = nil) throws {
         let fileString = try file.readAsString()
         let markdown = markdownParser.parse(fileString)
         let metadata = markdown.metadata
         let post = Post(title: metadata["title"] ?? "",
                         description: metadata["description"] ?? "",
                         content: markdown.html,
-                        createdAt: getDate(dateString: metadata["date"], fileDate: file.creationDate),
-                        updatedAt: getDate(dateString: metadata["date"], fileDate: file.modificationDate))
+                        createdAt: metadata["date"] != nil ? metadata["date"]!.getDate(date: file.creationDate) : Date(),
+                        updatedAt: metadata["date"] != nil ? metadata["date"]!.getDate(date: file.modificationDate) : Date())
         let titleHTML = Node.p(
             .class("blog-title"),
             .text(post.title)
@@ -59,28 +59,45 @@ struct MarkdownFileHandler {
         if (!outputFolder.containsSubfolder(named: dir)) {
             try outputFolder.createSubfolder(named: dir)
         }
-        let folder = try Folder(path: PROJECT_PATH + PROJECT_OUTPUT_DIR + "/" + dir)
-        if (!folder.containsFile(at: fileName)) {
-            let outputFile = try folder.createFile(named: fileName)
-            try outputFile.write(html)
-        } else {
-            let file = try folder.file(named: fileName)
-            if (try rebuild || SHA256(string: file.readAsString()) != SHA256(string: html)) {
-                try file.write(html)
+        if (!outputFolder.containsFile(at: fileName)) {
+            let outputFile = try outputFolder.createFile(named: fileName)
+            do {
+                try outputFile.write(html)
+                print("Create \(fileName)")
+            } catch {
+                print(error)
             }
-            try file.write(html)
+        } else {
+            let file = try outputFolder.file(named: fileName)
+            if (try rebuild || SHA256(string: file.readAsString()) != SHA256(string: html)) {
+                do {
+                    try file.write(html)
+                    print("Update \(fileName)")
+                } catch {
+                    print(error)
+                }
+            }
         }
     }
     
-    public func buildHTML(_ content: String, styleSheet: [String]? = nil, scripts: [String: String]? = nil) throws -> String {
+    public func buildHTML(_ content: String, styleSheet: [String]? = nil, scripts: [String: [String]]? = nil) throws -> String {
         let html = HTML(
             .head(
                 .title("Welcome to Ninjiacoder's Home!"),
                 .stylesheet("style.css"),
                 .unwrap(scripts, { (scriptList) -> Node<HTML.HeadContext> in
-                    .forEach(scriptList.keys) {
-                        .if($0 == "src", .script(.src(scriptList[$0]!)), else: .script(.raw(scriptList[$0]!)))
-                    }
+                    .unwrap(scriptList["src"], { (srcList) -> Node<HTML.HeadContext> in
+                        .forEach(srcList) {
+                            .script(.src($0))
+                        }
+                    })
+                }),
+                .unwrap(scripts, { (scriptList) -> Node<HTML.HeadContext> in
+                    .unwrap(scriptList["text"], { (textList) -> Node<HTML.HeadContext> in
+                        .forEach(textList) {
+                            .script(.text($0))
+                        }
+                    })
                 }),
                 .unwrap(styleSheet) {
                     .forEach($0) {
