@@ -29,7 +29,7 @@ struct MarkdownFileHandler {
         try buildBlogsIndexHTML()
         let posts = try PostGenerator.shared.transformFilesToPosts(Folder(path: PROJECT_PATH + "Posts").files)
         for post in posts {
-            try generateHTML(post, styleSheet: ["blog.css", "monokai-sublime.css"], scripts: ["src": ["highlight.pack.js"], "text": ["hljs.initHighlightingOnLoad();"]])
+            try generateHTML(post, styleSheet: ["../../style.css", "../../blog.css", "../../monokai-sublime.css"], scripts: ["src": ["../../highlight.pack.js"], "text": ["hljs.initHighlightingOnLoad();"]])
         }
     }
     
@@ -63,17 +63,20 @@ struct MarkdownFileHandler {
             )
         ).render()
         let html = try buildHTML(postHTML, styleSheet: styleSheet, scripts: scripts)
-        let fileName = post.title + ".html"
-        try exportHTMLFile(html, fileName: fileName, dir: PROJECT_OUTPUT_DIR)
+        let fileName = post.title
+        try exportHTMLFile(html, fileName: "index.html", dir: "blogs/" + fileName)
     }
     
     public func exportHTMLFile(_ html: String, fileName: String, dir: String, rebuild: Bool = false) throws {
         let outputFolder = try Folder(path: PROJECT_PATH + PROJECT_OUTPUT_DIR)
+        var safeFolder: Folder
         if (!outputFolder.containsSubfolder(named: dir)) {
-            try outputFolder.createSubfolder(named: dir)
+            safeFolder = try outputFolder.createSubfolder(named: dir)
+        } else {
+            safeFolder = try outputFolder.subfolder(named: dir)
         }
-        if (!outputFolder.containsFile(at: fileName)) {
-            let outputFile = try outputFolder.createFile(named: fileName)
+        if (!safeFolder.containsFile(at: fileName)) {
+            let outputFile = try safeFolder.createFile(named: fileName)
             do {
                 try outputFile.write(html)
                 print("Create \(fileName)")
@@ -81,7 +84,7 @@ struct MarkdownFileHandler {
                 print(error)
             }
         } else {
-            let file = try outputFolder.file(named: fileName)
+            let file = try safeFolder.file(named: fileName)
             if (try rebuild || SHA256(string: file.readAsString()) != SHA256(string: html)) {
                 do {
                     try file.write(html)
@@ -175,7 +178,7 @@ struct MarkdownFileHandler {
         let html = posts.map {
             Node.div(
                 .class("article"),
-                .a(.text($0.title), .href("/" + $0.title)),
+                .a(.text($0.title), .href("/blogs/" + $0.title)),
                 .div(
                     .style("display: flex; align-items: 'center'"),
                     .unwrap($0.tags) {
@@ -198,7 +201,7 @@ struct MarkdownFileHandler {
             ).render()
         }.reduce("") { $0 + $1 }
         try MarkdownFileHandler.shared.exportHTMLFile(MarkdownFileHandler.shared
-            .buildHTML(html, styleSheet: ["style.css"]), fileName: "blogs.html", dir: PROJECT_OUTPUT_DIR)
+            .buildHTML(html, styleSheet: ["../style.css"]), fileName: "index.html", dir: "blogs")
     }
 
     private func buildHeaderHTML() throws -> String {
