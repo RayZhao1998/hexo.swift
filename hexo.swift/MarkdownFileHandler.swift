@@ -24,18 +24,27 @@ struct MarkdownFileHandler {
         dateFormatter.dateFormat = DATE_FORMATTER_DATEFORMAT
     }
     
-    func generateHTML(_ file: File, styleSheet: [String]? = nil, scripts: [String: [String]]? = nil) throws {
-        let fileString = try file.readAsString()
-        let markdown = markdownParser.parse(fileString)
-        let metadata = markdown.metadata
-        let post = Post(title: metadata["title"] ?? "",
-                        description: metadata["description"] ?? "",
-                        content: markdown.html,
-                        createdAt: metadata["date"] != nil ? metadata["date"]!.getDate(date: file.creationDate) : Date(),
-                        updatedAt: metadata["date"] != nil ? metadata["date"]!.getDate(date: file.modificationDate) : Date())
+    public func generate() throws {
+        try buildIndexHTML()
+        try buildBlogsIndexHTML()
+        let posts = try PostGenerator.shared.transformFilesToPosts(Folder(path: PROJECT_PATH + "Posts").files)
+        for post in posts {
+            try generateHTML(post, styleSheet: ["blog.css", "monokai-sublime.css"], scripts: ["src": ["highlight.pack.js"], "text": ["hljs.initHighlightingOnLoad();"]])
+        }
+    }
+    
+    func generateHTML(_ post: Post, styleSheet: [String]? = nil, scripts: [String: [String]]? = nil) throws {
         let titleHTML = Node.p(
             .class("blog-title"),
             .text(post.title)
+        ).render()
+        let tagsHTML = Node.div(
+            .class("blog-tags"),
+            .unwrap(post.tags) {
+                .forEach($0) {
+                    .p(.text($0))
+                }
+            }
         ).render()
         let dateHTML = Node.p(
             .class("blog-date"),
@@ -43,14 +52,18 @@ struct MarkdownFileHandler {
         ).render()
         let postHTML = Node.div(
             .raw(titleHTML),
-            .raw(dateHTML),
+            .div(
+                .style("display: flex"),
+                .raw(tagsHTML),
+                .raw(dateHTML)
+            ),
             .div(
                 .class("blog-content"),
                 .raw(post.content)
             )
         ).render()
         let html = try buildHTML(postHTML, styleSheet: styleSheet, scripts: scripts)
-        let fileName = String(file.name.split(separator: ".").first ?? "undefined") + ".html"
+        let fileName = post.title + ".html"
         try exportHTMLFile(html, fileName: fileName, dir: PROJECT_OUTPUT_DIR)
     }
     
@@ -117,8 +130,78 @@ struct MarkdownFileHandler {
         ).render()
         return html
     }
+    
+    func buildIndexHTML() throws {
+        let content = Node.div(
+            .class("introduction"),
+            .h1(.text("Hello.")),
+            .p(
+                .text("My name is Ziyuan Zhao"),
+                .style("font-weight:500; font-size:2.2em")
+            ),
+            .p(
+                .text("I am a fullstack developer and a Swift lover. Now I'm an intership @meituan. Here is my "),
+                .a(.text("@blog"), .href("/blogs"))
+            ),
+            .p(
+                .text("I'm also an independent developer. I have two iOS app, "),
+                .a(.text("tomatic"), .href("https://apps.apple.com/cn/app/id1472871822")),
+                .text(" & "),
+                .a(.text("TodayMatters"), .href("https://itunes.apple.com/cn/app//id1448675694?mt=8"))
+            ),
+            .p(
+                .text("I'm one of the creators of NUAA Open Source. As a core developer, we have developed a cloud U-disk called "),
+                .a(.text("SafeU"), .href("https://safeu.a2os.club"))
+            ),
+            .p(
+                .text("Besides, I'm a fan of Marval & DC. I like playing games on PS4")
+            ),
+            .p(
+                .text("You can find me "),
+                .raw(try buildContactHTML())
+            )
+        ).render()
+        let html = try MarkdownFileHandler.shared.buildHTML(content)
+        let outputFolder = try Folder(path: PROJECT_PATH + PROJECT_OUTPUT_DIR)
+        let fileName = "index.html"
+        if (!outputFolder.containsFile(named: fileName)) {
+            let output = try outputFolder.createFile(named: fileName)
+            try output.write(html)
+        }
+    }
+    
+    func buildBlogsIndexHTML() throws {
+        let posts = try PostGenerator.shared.transformFilesToPosts(Folder(path: PROJECT_PATH + PROJECT_POST_DIR).files)
+        let html = posts.map {
+            Node.div(
+                .class("article"),
+                .a(.text($0.title), .href("/" + $0.title)),
+                .div(
+                    .style("display: flex; align-items: 'center'"),
+                    .unwrap($0.tags) {
+                        .div(
+                            .class("article-tags"),
+                            .forEach($0) {
+                                .p(.text($0))
+                            }
+                        )
+                    },
+                    .p(
+                        .class("article-date"),
+                        .text("发布于 " + dateFormatter.string(from: $0.createdAt))
+                    )
+                ),
+                .if($0.description != nil, .p(
+                    .class("article-description"),
+                    .text($0.description!))
+                )
+            ).render()
+        }.reduce("") { $0 + $1 }
+        try MarkdownFileHandler.shared.exportHTMLFile(MarkdownFileHandler.shared
+            .buildHTML(html, styleSheet: ["style.css"]), fileName: "blogs.html", dir: PROJECT_OUTPUT_DIR)
+    }
 
-    public func buildHeaderHTML() throws -> String {
+    private func buildHeaderHTML() throws -> String {
         let html = Node.h1(
             .class("header"),
             .a(.class("author"), .href("/"), .text("Ninjiacoder")),
@@ -127,7 +210,7 @@ struct MarkdownFileHandler {
         return html
     }
 
-    public func buildFooterHTML() throws -> String {
+    private func buildFooterHTML() throws -> String {
         let html = Node.div(
             .class("footer"),
             .p(.text("Copyright © Ziyuan Zhao from Today Boring 2020")),
@@ -137,7 +220,7 @@ struct MarkdownFileHandler {
         return html
     }
 
-    public func buildContentHTML(_ content: String) throws -> String {
+    private func buildContentHTML(_ content: String) throws -> String {
         let html = Node.div(
             .class("content"),
             .raw(content)
@@ -160,5 +243,25 @@ struct MarkdownFileHandler {
             }
         }
         return digestData
+    }
+    
+    private func buildContactHTML() throws -> String {
+        let dict = [
+            "@Github": "https://github.com/RayZhao1998",
+            "@Twitter": "https://twitter.com/RayZhao98",
+            "@Telegram": "https://t.me/ninjahome",
+            "@Weibo": "https://weibo.com/u/6056735717",
+            "@Zhihu": "http://www.zhihu.com/people/5kyn3t"
+        ]
+        var html = ""
+        var count = 0
+        for (platform, website) in dict {
+            html += Node.a(.href(website), .text(platform)).render()
+            if (dict.count != count + 1) {
+                html += ", "
+            }
+            count += 1
+        }
+        return html
     }
 }

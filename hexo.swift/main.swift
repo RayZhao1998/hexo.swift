@@ -6,12 +6,6 @@
 //  Copyright © 2020 Ziyuan Zhao. All rights reserved.
 //
 
-import Foundation
-import Files
+let cli = CLI()
 
-try buildIndexHTML()
-for file in try Folder(path: PROJECT_PATH + "Posts").files {
-    try MarkdownFileHandler.shared.generateHTML(file, styleSheet: ["blog.css", "monokai-sublime.css"], scripts: ["src": "highlight.pack.js", "text": "hljs.initHighlightingOnLoad();"])
-}
-
-
+try cli.run(in: .current)

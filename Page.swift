@@ -11,5 +11,4 @@ import Cocoa
 struct Page {
     var createdAt: Date
     var updatedAt: Date
-    
 }

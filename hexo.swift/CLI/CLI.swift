@@ -24,6 +24,11 @@ public struct CLI {
         switch arguments[1] {
         case "new":
             print("Add a new blog")
+        case "build":
+            try MarkdownFileHandler.shared.generate()
+        case "run":
+            let runner = WebsiteRunner(folder: folder)
+            try runner.run()
         default:
             return helpText()
         }
