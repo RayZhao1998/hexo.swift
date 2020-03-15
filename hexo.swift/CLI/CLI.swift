@@ -26,8 +26,8 @@ public struct CLI {
             if (arguments.count < 3) {
                 print("No new type!")
                 return
-            } else if (arguments.count < 4) {
-                if (arguments[2] != "post" || arguments[2] != "page") {
+            } else if (arguments.count < 5) {
+                if (arguments[2] != "post" && arguments[2] != "page") {
                     print("Must select a type: post or page")
                     return
                 } else if (arguments[2] == "post") {

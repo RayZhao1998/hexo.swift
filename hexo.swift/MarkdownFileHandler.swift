@@ -27,11 +27,14 @@ struct MarkdownFileHandler {
     public func generate() throws {
         try buildIndexHTML()
         try buildBlogsIndexHTML()
-        let posts = try PostGenerator.shared.transformFilesToPosts(Folder(path: PROJECT_PATH + PROJECT_POST_DIR).files)
+        let currentFolder: Folder = .current
+        let postFolder = try currentFolder.subfolder(named: PROJECT_POST_DIR)
+        let pageFolder = try currentFolder.subfolder(named: PROJECT_PAGE_DIR)
+        let posts = try PostGenerator.shared.transformFilesToPosts(postFolder.files)
         for post in posts {
             try generateHTML(post, styleSheet: ["../../style.css", "../../blog.css", "../../monokai-sublime.css"], scripts: ["src": ["../../highlight.pack.js"], "text": ["hljs.initHighlightingOnLoad();"]])
         }
-        let pages = try PageGenerator.shared.transformFilesToPages(Folder(path: PROJECT_PATH + PROJECT_PAGE_DIR).files)
+        let pages = try PageGenerator.shared.transformFilesToPages(pageFolder.files)
         for page in pages {
             try generateHTML(page, styleSheet: ["../style.css", "../blog.css", "../monokai-sublime.css"], scripts: ["scr": ["../highlight.pack.js"], "text": ["hljs.initHighlightingOnLoad();"]])
         }
@@ -89,7 +92,8 @@ struct MarkdownFileHandler {
     }
     
     public func exportHTMLFile(_ html: String, fileName: String, dir: String, rebuild: Bool = false) throws {
-        let outputFolder = try Folder(path: PROJECT_PATH + PROJECT_OUTPUT_DIR)
+        let currentFolder: Folder = .current
+        let outputFolder = try currentFolder.subfolder(named: PROJECT_OUTPUT_DIR)
         var safeFolder: Folder
         if (!outputFolder.containsSubfolder(named: dir)) {
             safeFolder = try outputFolder.createSubfolder(named: dir)
@@ -186,7 +190,8 @@ struct MarkdownFileHandler {
             )
         ).render()
         let html = try MarkdownFileHandler.shared.buildHTML(content)
-        let outputFolder = try Folder(path: PROJECT_PATH + PROJECT_OUTPUT_DIR)
+        let currentFolder: Folder = .current
+        let outputFolder = try currentFolder.subfolder(named: PROJECT_OUTPUT_DIR)
         let fileName = "index.html"
         if (!outputFolder.containsFile(named: fileName)) {
             let output = try outputFolder.createFile(named: fileName)
@@ -195,7 +200,9 @@ struct MarkdownFileHandler {
     }
     
     func buildBlogsIndexHTML() throws {
-        let posts = try PostGenerator.shared.transformFilesToPosts(Folder(path: PROJECT_PATH + PROJECT_POST_DIR).files)
+        let currentFolder: Folder = .current
+        let postFolder = try currentFolder.subfolder(named: PROJECT_POST_DIR)
+        let posts = try PostGenerator.shared.transformFilesToPosts(postFolder.files)
         let html = posts.map {
             Node.div(
                 .class("article"),

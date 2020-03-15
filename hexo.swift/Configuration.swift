@@ -6,7 +6,6 @@
 //  Copyright © 2020 Ziyuan Zhao. All rights reserved.
 //
 
-let PROJECT_PATH = "/Users/ziyuanzhao/Documents/products/hexo.swift/hexo.swift/"
 let PROJECT_POST_DIR = "Posts"
 let PROJECT_PAGE_DIR = "Pages"
 let PROJECT_OUTPUT_DIR = "Output"

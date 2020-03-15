@@ -19,7 +19,8 @@ struct MarkdownFileManager {
     }
     
     public func createNewPost(_ name: String) throws {
-        let postFolder = try Folder(path: PROJECT_PATH + PROJECT_POST_DIR)
+        let currentFolder: Folder = .current
+        let postFolder = try currentFolder.subfolder(named: PROJECT_POST_DIR)
         if (postFolder.containsFile(named: name + ".md")) {
             print("The file has existed!")
         } else {
@@ -35,7 +36,8 @@ struct MarkdownFileManager {
     }
     
     public func createNewPage(_ name: String) throws {
-        let pageFolder = try Folder(path: PROJECT_PATH + PROJECT_PAGE_DIR)
+        let currentFolder: Folder = .current
+        let pageFolder = try currentFolder.subfolder(named: PROJECT_PAGE_DIR)
         if (pageFolder.containsFile(named: name + ".md")) {
             print("The file has existed!")
         } else {
