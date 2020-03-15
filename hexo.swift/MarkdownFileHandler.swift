@@ -27,9 +27,13 @@ struct MarkdownFileHandler {
     public func generate() throws {
         try buildIndexHTML()
         try buildBlogsIndexHTML()
-        let posts = try PostGenerator.shared.transformFilesToPosts(Folder(path: PROJECT_PATH + "Posts").files)
+        let posts = try PostGenerator.shared.transformFilesToPosts(Folder(path: PROJECT_PATH + PROJECT_POST_DIR).files)
         for post in posts {
             try generateHTML(post, styleSheet: ["../../style.css", "../../blog.css", "../../monokai-sublime.css"], scripts: ["src": ["../../highlight.pack.js"], "text": ["hljs.initHighlightingOnLoad();"]])
+        }
+        let pages = try PageGenerator.shared.transformFilesToPages(Folder(path: PROJECT_PATH + PROJECT_PAGE_DIR).files)
+        for page in pages {
+            try generateHTML(page, styleSheet: ["../style.css", "../blog.css", "../monokai-sublime.css"], scripts: ["scr": ["../highlight.pack.js"], "text": ["hljs.initHighlightingOnLoad();"]])
         }
     }
     
@@ -65,6 +69,23 @@ struct MarkdownFileHandler {
         let html = try buildHTML(postHTML, styleSheet: styleSheet, scripts: scripts)
         let fileName = post.title
         try exportHTMLFile(html, fileName: "index.html", dir: "blogs/" + fileName)
+    }
+    
+    func generateHTML(_ page: Page, styleSheet: [String]? = nil, scripts: [String: [String]]? = nil) throws {
+        let titleHTML = Node.p(
+            .class("blog-title"),
+            .text(page.title)
+        ).render()
+        let postHTML = Node.div(
+            .raw(titleHTML),
+            .div(
+                .class("blog-content"),
+                .raw(page.content)
+            )
+        ).render()
+        let html = try buildHTML(postHTML, styleSheet: styleSheet, scripts: scripts)
+        let fileName = page.title
+        try exportHTMLFile(html, fileName: "index.html", dir: fileName)
     }
     
     public func exportHTMLFile(_ html: String, fileName: String, dir: String, rebuild: Bool = false) throws {
@@ -180,7 +201,7 @@ struct MarkdownFileHandler {
                 .class("article"),
                 .a(.text($0.title), .href("/blogs/" + $0.title)),
                 .div(
-                    .style("display: flex; align-items: 'center'"),
+                    .style("display: flex; align-items: center"),
                     .unwrap($0.tags) {
                         .div(
                             .class("article-tags"),
@@ -207,8 +228,18 @@ struct MarkdownFileHandler {
     private func buildHeaderHTML() throws -> String {
         let html = Node.h1(
             .class("header"),
-            .a(.class("author"), .href("/"), .text("Ninjiacoder")),
-            .p(.text("Swift lover, Fullstack Developer"))
+            .div(
+                .class("author-div"),
+                .a(.class("author"), .href("/"), .text("Ninjiacoder")),
+                .p(.text("Swift lover, Fullstack Developer"))
+            ),
+            .div(
+                .class("navbar"),
+                .ul(
+                    .li(.a(.text("博客"), .href("/blogs"))),
+                    .li(.a(.text("关于"), .href("/about")))
+                )
+            )
         ).render()
         return html
     }

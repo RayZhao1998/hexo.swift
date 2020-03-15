@@ -23,7 +23,20 @@ public struct CLI {
         
         switch arguments[1] {
         case "new":
-            print("Add a new blog")
+            if (arguments.count < 3) {
+                print("No new type!")
+                return
+            } else if (arguments.count < 4) {
+                if (arguments[2] != "post" || arguments[2] != "page") {
+                    print("Must select a type: post or page")
+                    return
+                } else if (arguments[2] == "post") {
+                    try MarkdownFileManager.shared.createNewPost(arguments[3])
+                } else if (arguments[2] == "page") {
+                    try MarkdownFileManager.shared.createNewPage(arguments[3])
+                }
+            }
+            
         case "build":
             try MarkdownFileHandler.shared.generate()
         case "run":
@@ -38,7 +51,7 @@ public struct CLI {
 extension CLI {
     func helpText() {
         print("""
-        THis is a help!
+        This is a help!
         """)
     }
 }

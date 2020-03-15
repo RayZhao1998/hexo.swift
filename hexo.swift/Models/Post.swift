@@ -52,6 +52,6 @@ struct PostGenerator {
                             updatedAt: metadata["date"] != nil ? metadata["date"]!.getDate(date: file.modificationDate) : Date())
             posts.append(post)
         }
-        return posts
+        return posts.sorted { $0.createdAt > $1.createdAt }
     }
 }
