@@ -48,8 +48,8 @@ struct PostGenerator {
                             description: metadata["description"] ?? "",
                             content: markdown.html,
                             tags: metadata["tags"] != nil ? metadata["tags"]!.split(separator: ",").map(String.init) : nil,
-                            createdAt: metadata["date"] != nil ? metadata["date"]!.getDate(date: file.creationDate) : Date(),
-                            updatedAt: metadata["date"] != nil ? metadata["date"]!.getDate(date: file.modificationDate) : Date())
+                            createdAt: metadata["date"] != nil ? metadata["date"]!.getDate() : Date(),
+                            updatedAt: file.modificationDate ?? Date())
             posts.append(post)
         }
         return posts.sorted { $0.createdAt > $1.createdAt }

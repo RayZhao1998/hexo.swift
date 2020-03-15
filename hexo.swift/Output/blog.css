@@ -173,17 +173,23 @@
 }
 
 .blog-content ol ol,.blog-content ul ol, .blog-content ul li {
-    list-style-type: lower-roman
+    list-style-type: disc
 }
 
 .blog-content ol ol ol,.blog-content ol ul ol,.blog-content ul ol ol,.blog-content ul ul ol {
-    list-style-type: lower-alpha
+    list-style-type: circle
 }
 
 .blog-content pre code {
     padding: 16px;
     font-size: 0.95em;
     border-radius: 12px;
+}
+
+.blog-content img {
+    border-radius: 16px;
+    width: 100%;
+    margin-top: 16px;
 }
 
 p code, h1 code, h2 code, h3 code, h4 code, h5 code {

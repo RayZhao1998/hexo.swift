@@ -9,13 +9,10 @@
 import Foundation
 
 extension String {
-    func getDate(date: Date?) -> Date {
+    func getDate() -> Date {
         let dateFormatter = DateFormatter()
         dateFormatter.locale = Locale(identifier: DATE_FORMATTER_LOCALE_IDENTIFIER)
         dateFormatter.dateFormat = DATE_FORMATTER_DATEFORMAT
-        if let date = date {
-            return date
-        }
         return dateFormatter.date(from: self) ?? Date()
     }
 }

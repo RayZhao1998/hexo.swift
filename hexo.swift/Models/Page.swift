@@ -38,8 +38,8 @@ struct PageGenerator {
             let metadata = markdown.metadata
             let page = Page(title: metadata["title"] ?? "",
                             content: markdown.html,
-                            createdAt: metadata["date"] != nil ? metadata["date"]!.getDate(date: file.creationDate) : Date(),
-                            updatedAt: metadata["date"] != nil ? metadata["date"]!.getDate(date: file.modificationDate) : Date())
+                            createdAt: metadata["date"] != nil ? metadata["date"]!.getDate() : Date(),
+                            updatedAt: file.modificationDate ?? Date())
             pages.append(page)
         }
         return pages.sorted { $0.createdAt > $1.createdAt }

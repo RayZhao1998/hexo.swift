@@ -2,7 +2,7 @@
 title: Codable 协议
 date: 2019-11-12
 description: 简单了解了一下 Codable 协议如何进行 JSON 的序列化与反序列化
-tags: test,test1
+tags: Swift,基础
 ---
 
 `Codable` 协议能实现基本的序列化和反序列化，`Codable` 其实是两个协议合一—— `Encodable` & `Decodable`

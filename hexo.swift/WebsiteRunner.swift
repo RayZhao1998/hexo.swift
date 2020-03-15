@@ -28,7 +28,7 @@ struct WebsiteRunner {
         serverQueue.async {
             do {
                 _ = try shellOut(
-                    to: "python3 -m http.server 8888",
+                    to: "python3 -m http.server 8080",
                     at: outputFolder.path,
                     process: serverProcess
                 )
