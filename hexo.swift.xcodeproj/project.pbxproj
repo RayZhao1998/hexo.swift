@@ -11,6 +11,7 @@
 		D717345E2415129600613F7B /* MarkdownFileHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = D717345D2415129600613F7B /* MarkdownFileHandler.swift */; };
 		D717346324151A4A00613F7B /* Plot in Frameworks */ = {isa = PBXBuildFile; productRef = D717346224151A4A00613F7B /* Plot */; };
 		D717346624151AB100613F7B /* Ink in Frameworks */ = {isa = PBXBuildFile; productRef = D717346524151AB100613F7B /* Ink */; };
+		D74D50BE241E36770008EEF1 /* Page.swift in Sources */ = {isa = PBXBuildFile; fileRef = D74D50BD241E36770008EEF1 /* Page.swift */; };
 		D76090C12417E50C00AD2E6D /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = D76090C02417E50C00AD2E6D /* Post.swift */; };
 		D77C41462416155C005571A1 /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = D77C41452416155C005571A1 /* Configuration.swift */; };
 		D7E2AFC0241D26E700DCF61B /* MarkdownFileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7E2AFBF241D26E700DCF61B /* MarkdownFileManager.swift */; };
@@ -20,7 +21,6 @@
 		D7F6FBD92419528B0057B452 /* String+Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7F6FBD82419528B0057B452 /* String+Date.swift */; };
 		D7F734FA241A22CF0099F608 /* WebsiteRunner.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7F734F9241A22CF0099F608 /* WebsiteRunner.swift */; };
 		D7F9F3B824141734000F11A6 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7F9F3B724141734000F11A6 /* main.swift */; };
-		D7F9F3C024141754000F11A6 /* Page.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7F9F3BF24141754000F11A6 /* Page.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -47,6 +47,7 @@
 /* Begin PBXFileReference section */
 		D717345D2415129600613F7B /* MarkdownFileHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarkdownFileHandler.swift; sourceTree = "<group>"; };
 		D71734602415130700613F7B /* test.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = test.md; sourceTree = "<group>"; };
+		D74D50BD241E36770008EEF1 /* Page.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Page.swift; sourceTree = "<group>"; };
 		D76090BF2417448B00AD2E6D /* Codable协议.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = "Codable协议.md"; sourceTree = "<group>"; };
 		D76090C02417E50C00AD2E6D /* Post.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		D77C41452416155C005571A1 /* Configuration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Configuration.swift; sourceTree = "<group>"; };
@@ -58,7 +59,6 @@
 		D7F734F9241A22CF0099F608 /* WebsiteRunner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebsiteRunner.swift; sourceTree = "<group>"; };
 		D7F9F3B424141734000F11A6 /* hexo.swift */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = hexo.swift; sourceTree = BUILT_PRODUCTS_DIR; };
 		D7F9F3B724141734000F11A6 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
-		D7F9F3BF24141754000F11A6 /* Page.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Page.swift; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -153,8 +153,8 @@
 		D7F9F3BE2414173E000F11A6 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				D74D50BD241E36770008EEF1 /* Page.swift */,
 				D76090C02417E50C00AD2E6D /* Post.swift */,
-				D7F9F3BF24141754000F11A6 /* Page.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -259,9 +259,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				D7E2AFC0241D26E700DCF61B /* MarkdownFileManager.swift in Sources */,
-				D7F9F3C024141754000F11A6 /* Page.swift in Sources */,
 				D7F734FA241A22CF0099F608 /* WebsiteRunner.swift in Sources */,
 				D77C41462416155C005571A1 /* Configuration.swift in Sources */,
+				D74D50BE241E36770008EEF1 /* Page.swift in Sources */,
 				D7F6FBD5241941C10057B452 /* CLI.swift in Sources */,
 				D7F6FBD92419528B0057B452 /* String+Date.swift in Sources */,
 				D76090C12417E50C00AD2E6D /* Post.swift in Sources */,
