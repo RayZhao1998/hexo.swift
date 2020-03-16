@@ -1,0 +1,78 @@
+<!DOCTYPE html><html><head><title>Welcome to Ninjiacoder's Home!</title><meta name="twitter:title" content="Welcome to Ninjiacoder's Home!"/><meta name="og:title" content="Welcome to Ninjiacoder's Home!"/><link rel="stylesheet" href="style.css" type="text/css"/><script src="../../highlight.pack.js"></script><script>hljs.initHighlightingOnLoad();</script><link rel="stylesheet" href="../../style.css" type="text/css"/><link rel="stylesheet" href="../../blog.css" type="text/css"/><link rel="stylesheet" href="../../monokai-sublime.css" type="text/css"/><meta charset="UTF-8"/></head><body><div class="wrapper"><h1 class="header"><div class="author-div"><a class="author" href="/">Ninjiacoder</a><p>Swift lover, Fullstack Developer</p></div><div class="navbar"><ul><li><a href="/blogs">博客</a></li><li><a href="/about">关于</a></li></ul></div></h1><div class="content"><div><p class="blog-title">SwiftUI数据流实践</p><div style="display: flex"><div class="blog-tags"></div><p class="blog-date">发布于 2019-10-19</p></div><div class="blog-content"><h2>前提</h2><p>状态（State）是一个 App 中最关键的东西之一，比如我们要用 SwiftUI 来开一个音乐播放器，其中比较关键的是播放按钮，我们会有两个播放状态，播放和暂停，不同状态按钮的图片也是不同的</p><pre><code class="language-swift">struct ContentView: View {
+	private var isPlaying: Bool = false
+
+	var body: some View {
+		Button(action: {
+			...
+		}) {
+			Image(name: isPlaying ? &amp;quot;pause&amp;quot; : &amp;quot;play&amp;quot;)
+		}
+	}
+}
+</code></pre><p>这里我们实现了最简单的根据 <code>isPlaying</code> 状态显示不同按钮图片的代码，但是我们如何通过按钮的点击事件来更新 <code>isPlaying</code> 状态？</p><h2><code>@State</code></h2><p>SwiftUI 通过 <code>@State</code> 来管理属性，当 state 值发生变化，界面也会随之更新，对于一个界面，state 是 single source of truth(并不知道该怎么翻译)</p><p>State 实例和它的值并不是等价的，获取它的值可以直接使用它的值属性</p><p>应该通过 view 的 body 或者方法来获取 state 属性。因此，建议将 state 属性定义成私有来防止其他 view 来获取它。</p><p>可以使用 <code>binding</code> 来绑定一个 state，或者使用 <code>$</code> 前缀</p><p>所以，我们仅需在 Button 的 action 中 <code>self.isPlaying.toggle()</code> 来更新，同时也要给 <code>isPlaying</code> 使用 <code>@State</code> 的 property wrapper</p><pre><code class="language-swift">struct ContentView: View {
+	@State private var isPlaying: Bool = false
+	
+	var body: some View {
+		Button(action: {
+			self.isPlaying.toggle()
+		}) {
+			Image(name: self.isPlaying ? &amp;quot;pause&amp;quot; : &amp;quot;play&amp;quot;)
+		}
+	}
+}
+</code></pre><p>当我当前这个 View 比较复杂时，我需要拆分组件，这时候我要把 Button 作为一个独立的组件，我们通过 command 点击 Button，使用 <code>Estract Subview</code> 来抽取组件</p><pre><code class="language-swift">struct ContentView: View {
+    @State var isPlaying: Bool = false
+    
+    var body: some View {
+        HStack {
+            PlayerButton()
+        }
+    }
+}
+
+struct PlayerButton: View {
+    var body: some View {
+        Button(action: {
+            self.isPlaying.toggle()
+        }) {
+            Image(systemName: isPlaying ? &amp;quot;pause&amp;quot; : &amp;quot;play&amp;quot;)
+        }
+    }
+}
+</code></pre><p>但是 <code>PlayerButton</code> 缺少了 <code>isPlaying</code> 的状态。</p><h2><code>@Binding</code></h2><p>我们可以通过 <code>SwiftUI</code> 的另一个 <code>Property Wrapper</code> 来实现组件间状态的传递。</p><pre><code class="language-swift">struct ContentView: View {
+    @State var isPlaying: Bool = false
+    
+    var body: some View {
+        HStack {
+            PlayerButton(isPlaying: self.$isPlaying)
+        }
+    }
+}
+
+struct PlayerButton: View {
+	@Binding var isPlaying: Bool
+
+    var body: some View {
+        Button(action: {
+            self.isPlaying.toggle()
+        }) {
+            Image(systemName: isPlaying ? &amp;quot;pause&amp;quot; : &amp;quot;play&amp;quot;)
+        }
+    }
+}
+</code></pre><p>特别需要注意的地方是，我们这边需要用上 <code>$</code> 符号来做传递。</p><p>但是这样做会有一些问题 1. 如果我嵌套了好几级组件，而我最里层的组件需要用到的状态是在最顶层设置的，那么我们需要一级一级的往下传递，而中间几层又并不需要这个属性，就导致了在组件的定义中添加不必要的属性，降低了代码的可读性 2. 状态零散的散布在各个 <code>View</code> 中，不利于管理</p><h2>@ObservedObject</h2><p>当我们的状态比较复杂后，又或者我们需要在多个界面共享状态时，我们需要用到 <code>@ObservedObject</code>，这里似乎是借鉴了 Redux 的思想，我们会定义一个 <code>Store</code> 用来做全局的状态存储，为了能够让它可以使用 <code>@ObservedObjet</code> 我们需要遵循 <code>ObservableObject </code> 协议，然后把我们的 <code>isPlaying</code> 属性放到 <code>Store</code> 中存储</p><pre><code class="language-swift">final class Store: ObservableObject {
+	@Published var isPlaying: Bool = false
+}
+</code></pre><p>然后将 <code>@State var isPlaying: Bool = false</code> 替换成 <code>@ObservedObject var store = Store()</code> 即可</p><pre><code class="language-swift">struct ContentView: View {
+    @ObservedObject var store = Store()
+    
+    var body: some View {
+        PlayerButton(isPlaying: self.$store.isPlaying)
+    }
+}
+</code></pre><p>但是这样做依然解决不了组件间需要不断传递这个 <code>Store</code> 的问题，我的解决方案很简单，使用单例</p><pre><code class="language-swift">final class Store: ObservableObject {
+	static let shared = Store()
+
+	@Published var isPlaying: Bool = false
+}
+</code></pre><p>这样我们在需要的地方，获取这个 <code>Store.shared</code> 中的属性，对其修改后也能在其他页面作出相应的修改。</p><h2>小结</h2><p>以上算是我近一个月用 <code>SwiftUI</code> 写 side projects 时的一些心得，主要是 <code>@State</code>、 <code>@Binding</code> 和 <code>@ObservedObject</code> 这三个 property wrapper 在 SwiftUI 数据流中的使用</p><h2>参考资料</h2><ol><li><a href="https://mecid.github.io/2019/07/03/managing-data-flow-in-swiftui/"> Managing Data Flow in SwiftUI</a></li><li><a href="https://developer.apple.com/videos/play/wwdc2019/226/">WWDC2019 Session 226 Data Flow Through SwiftUI</a></li><li><a href="https://www.hackingwithswift.com/quick-start/swiftui/whats-the-difference-between-observedobject-state-and-environmentobject"> What’s the difference between @ObservedObject, @State, and @EnvironmentObject?</a></li></ol></div></div></div><div class="footer"><p>Copyright © Ziyuan Zhao from Today Boring 2020</p><p>本网站由 hexo.swift 强力驱动</p><a href="http://www.beian.miit.gov.cn">苏ICP备17050796号</a></div></div></body></html>

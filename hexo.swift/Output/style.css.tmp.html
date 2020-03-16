@@ -1,0 +1,431 @@
+<style>
+:root {
+    color-scheme: light dark;
+    --background-color: white;
+    --a-color: #0067FB;
+    --text-color: #161616;
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --background-color: #161616;
+        --text-color: white;
+    }
+
+    li {
+        color: white;
+    }
+}
+
+* {
+    box-sizing: border-box;
+}
+
+@media (min-width: 48rem) {
+    html {
+        font-size: 20px;
+    }    
+}
+
+html {
+    background-color: var(--background-color);
+}
+
+a {
+    text-decoration: none;
+}
+
+a:hover, a:focus {
+    text-decoration: underline;
+}
+
+h1, h2, h3, h4, h5 {
+    color: var(--text-color);
+    text-rendering: optimizeLegibility;
+}
+
+p {
+    color: var(--text-color);
+    margin-top: 0;
+    font-size: 20px;
+}
+
+time {
+    color: var(--text-color);
+}
+
+.content {
+    position: relative;
+    min-height: 100%;
+    max-width: 48rem;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+    padding-bottom: 42px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.header {
+    max-width: 48rem;
+    padding-top: 2rem;
+    padding-bottom: 1rem;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+}
+
+.footer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 40px;
+    position: absolute;
+    width: 100%;
+    padding-bottom: 16px;
+}
+
+.footer p {
+    font-size: 16px;
+}
+
+.links {
+    font-size: 16px;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    align-items: center;
+}
+
+.links a {
+    color: #F9F9F9;
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --background-color: #161616;
+        --text-color: white;
+    }
+}
+
+html, body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    font-family: 'Rubik', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-size: calc(10px + 0.33vw);
+    color: var(--text-color);
+}
+
+html {
+    background: var(--background-color);
+}
+
+a {
+    color: #666;
+    text-decoration: none
+}
+
+@media (min-width: 48em) {
+    .wrapper {
+        min-height: 100%;
+        width: 100%;
+        position: relative;
+    }
+
+    .content {
+        display: flex;
+        flex-direction: row;
+        justify-content: left;
+        align-items: center;
+        width: 100%;
+        padding-bottom: 40px;
+    }
+
+    .introduction h1 {
+        margin: 0;
+        font-size: 4.5em;
+        font-weight: 500;
+    }
+
+    .introduction p {
+        font-size: 1.6em;
+        font-weight: 300;
+        line-height: 1.4;
+        max-width: 26em;
+    }
+}
+
+@media (max-width: 48em) {
+    .wrapper {
+        min-height: 100%;
+        width: 100%;
+        position: relative;
+    }
+
+    .content {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        padding-bottom: 40px;
+    }
+
+    .introduction {
+        width: 90%;
+        margin-top: 5vh;
+        margin-left: 5%;
+    }
+
+    .introduction h1 {
+        margin: 0;
+        font-size: 4.5em;
+        font-weight: 500;
+    }
+
+    .introduction p {
+        font-size: 1.6em;
+        font-weight: 300;
+        line-height: 1.4;
+        max-width: 26em;
+    }
+}
+
+a {
+    color: gray;
+    background-color: transparent;
+    text-decoration: none;
+    position: relative;
+    display: inline-block;
+    padding: 0px 1px;
+    transition: color ease 0.3s;
+    word-break: break-word;
+}
+
+a:hover {
+    color: white;
+    text-decoration: none;
+}
+
+a:hover::after {
+    height: 100%;
+}
+
+a::after {
+    text-decoration: none;
+    content: '';
+    position: absolute;
+    z-index: -1;
+    width: 100%;
+    height: 0%;
+    left: 0;
+    bottom: 0;
+    background-color: var(--a-color);
+    transition: all ease 0.3s;
+}
+
+@media (max-width: 48em) {
+    .author {
+        display: inline;
+        color: inherit;
+        font-size: 34px;
+        font-weight: 600;
+    }
+
+    .header small {
+        font-size: 28px;
+        color: #666;
+        font-weight: 400;
+    }
+
+    .blog-title {
+        font-size: 34px;
+        margin-top: 0; 
+    }
+}
+
+@media (min-width: 48em) {
+    .author {
+        display: inline;
+        color: inherit;
+        font-size: 36px;
+        font-weight: 600;
+    }
+
+    .header small {
+        font-size: 30px;
+        color: #666;
+        font-weight: 500;
+    }
+
+    .blog-title {
+        font-size: 36px;
+        margin-top: 0;
+    }
+}
+
+.blog {
+    -ms-text-size-adjust: 100%;
+    -webkit-text-size-adjust: 100%;
+    line-height: 1.5;
+    font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol;
+    font-size: 16px;
+    line-height: 1.5;
+    word-wrap: break-word
+}
+
+.blog-title {
+    font-size: 36px;
+    margin-top: 0;
+}
+
+.blog-date {
+    display: block;
+    margin-top: -.5rem;
+    margin-bottom: 1rem;
+}
+
+.blog * {
+    box-sizing: border-box
+}
+
+.blog input {
+    font-family: inherit;
+    font-size: inherit;
+    line-height: inherit
+}
+
+.blog a {
+    color: #666;
+    text-decoration: none
+}
+
+.blog a:hover {
+    text-decoration: underline
+}
+
+.blog strong {
+    font-weight: 600
+}
+
+.blog hr {
+    background: 0 0;
+    border: 0;
+    border-bottom: 1px solid #dfe2e5;
+    height: 0;
+    margin: 15px 0;
+    overflow: hidden
+}
+
+.blog hr:before {
+    content: "";
+    display: table
+}
+
+.blog hr:after {
+    clear: both;
+    content: "";
+    display: table
+}
+
+.blog table {
+    border-collapse: collapse;
+    border-spacing: 0
+}
+
+.blog td,.blog th {
+    padding: 0
+}
+
+.blog details summary {
+    cursor: pointer
+}
+
+.blog h1,.blog h2,.blog h3,.blog h4,.blog h5,.blog h6 {
+    margin-bottom: 0.5em;
+    margin-top: 0
+}
+
+.blog h1 {
+    font-size: 36px
+}
+
+.blog h1,.blog h2 {
+    font-weight: 700
+}
+
+.blog h2 {
+    font-size: 26px
+}
+
+.blog h3 {
+    font-size: 24px
+}
+
+.blog h3,.blog h4 {
+    font-weight: 600
+}
+
+.blog h4 {
+    font-size: 22px
+}
+
+.blog h5 {
+    font-size: 20px
+}
+
+.blog h5,.blog h6 {
+    font-weight: 600
+}
+
+.blog h6 {
+    font-size: 18px
+}
+
+.blog p {
+    font-size: 18px;
+    margin-bottom: 28px;
+    margin-top: 0
+}
+
+.blog blockquote {
+    margin: 0
+}
+
+.blog ol,.blog ul {
+    font-size: 18px;
+    margin-bottom: 0;
+    margin-top: 0;
+    padding-left: 0
+}
+
+.blog ol ol,.blog ul ol, .blog ul li {
+    list-style-type: lower-roman
+}
+
+.blog ol ol ol,.blog ol ul ol,.blog ul ol ol,.blog ul ul ol {
+    list-style-type: lower-alpha
+}
+
+.blog pre code {
+    padding: 16px;
+    font-size: 16px;
+    border-radius: 16px;
+}
+
+p code, h1 code, h2 code, h3 code, h4 code, h5 code {
+    background-color: var(--code-background-color);
+    padding: 4px;
+    border-radius: 6px;
+}
+
+img {
+    width: 60%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}</style>
