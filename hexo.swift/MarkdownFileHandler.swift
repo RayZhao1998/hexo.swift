@@ -140,6 +140,13 @@ struct MarkdownFileHandler {
                         }
                     })
                 }),
+                .script(.async(), .src("https://www.googletagmanager.com/gtag/js?id=UA-107867782-1")),
+                .script(.raw("""
+                    window.dataLayer = window.dataLayer || [];
+                    function gtag(){dataLayer.push(arguments);}
+                    gtag('js', new Date());
+                    gtag('config', 'UA-107867782-1');
+                """)),
                 .unwrap(styleSheet) {
                     .forEach($0) {
                         .stylesheet($0)
@@ -255,7 +262,10 @@ struct MarkdownFileHandler {
         let html = Node.div(
             .class("footer"),
             .p(.text("Copyright © Ziyuan Zhao from Today Boring 2020")),
-            .p(.text("本网站由 hexo.swift 强力驱动")),
+            .p(.text("本网站由 "),
+               .a(.text("hexo.swift"), .href("https://github.com/RayZhao1998/hexo.swift")),
+               .text(" 强力驱动")
+            ),
             .a(.text("苏ICP备17050796号"), .href("http://www.beian.miit.gov.cn"))
         ).render()
         return html

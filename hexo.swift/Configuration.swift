@@ -6,6 +6,9 @@
 //  Copyright © 2020 Ziyuan Zhao. All rights reserved.
 //
 
+import Files
+
+let PROJECT_DIR = Folder.current.path
 let PROJECT_POST_DIR = "Posts"
 let PROJECT_PAGE_DIR = "Pages"
 let PROJECT_OUTPUT_DIR = "Output"
